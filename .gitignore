@@ -19,3 +19,6 @@ build/
 *.log
 .DS_Store
 Thumbs.db
+
+bob_sessions/
+bob_task*.md

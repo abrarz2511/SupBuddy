@@ -1,5 +1,8 @@
 # Agentic Logistics Exception Management
 
+<img width="1672" height="941" alt="264d38d0-2248-41f5-b920-b31f86755de0" src="https://github.com/user-attachments/assets/f468825d-9bfb-4944-a4d5-b9406843aea3" />
+
+
 An AI-assisted logistics operations platform that helps logistics coordinators detect shipment exceptions, understand likely causes, and act faster. The system combines a full-stack dashboard, deterministic backend monitoring, contextual data tools, and an IBM watsonx Orchestrate analyst agent to turn raw shipment events into clear, prioritized recommendations.
 
 ## About the Project

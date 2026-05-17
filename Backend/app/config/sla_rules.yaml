@@ -1,0 +1,117 @@
+# SLA Rules Configuration
+# Defines rules for detecting shipment issues and triggering alerts
+
+rules:
+  # Missing milestone updates
+  - name: "Missing Port Received Update"
+    type: "MISSING_UPDATE"
+    milestone_type: "PORT_RECEIVED"
+    threshold_minutes: 120  # 2 hours after expected arrival
+    priority: "HIGH"
+    description: "Port received milestone not reported within 2 hours of expected arrival"
+    
+  - name: "Missing Customs Submission"
+    type: "MISSING_UPDATE"
+    milestone_type: "CUSTOMS_SUBMITTED"
+    threshold_minutes: 240  # 4 hours
+    priority: "MEDIUM"
+    description: "Customs submission not reported within 4 hours of expected time"
+    
+  - name: "Missing Customs Clearance"
+    type: "MISSING_UPDATE"
+    milestone_type: "CUSTOMS_CLEARED"
+    threshold_minutes: 180  # 3 hours
+    priority: "HIGH"
+    description: "Customs clearance not reported within 3 hours of expected time"
+    
+  - name: "Missing Delivery Center Receipt"
+    type: "MISSING_UPDATE"
+    milestone_type: "DELIVERY_CENTER_RECEIVED"
+    threshold_minutes: 120  # 2 hours
+    priority: "MEDIUM"
+    description: "Delivery center receipt not reported within 2 hours of expected arrival"
+    
+  - name: "Missing Regional Hub Receipt"
+    type: "MISSING_UPDATE"
+    milestone_type: "REGIONAL_HUB_RECEIVED"
+    threshold_minutes: 90  # 1.5 hours
+    priority: "MEDIUM"
+    description: "Regional hub receipt not reported within 90 minutes of expected arrival"
+    
+  - name: "Missing Out for Delivery Update"
+    type: "MISSING_UPDATE"
+    milestone_type: "OUT_FOR_DELIVERY"
+    threshold_minutes: 60  # 1 hour
+    priority: "HIGH"
+    description: "Out for delivery status not reported within 1 hour of expected time"
+    
+  # Late arrivals (milestone received but later than expected)
+  - name: "Late Port Arrival"
+    type: "LATE_ARRIVAL"
+    milestone_type: "PORT_RECEIVED"
+    threshold_minutes: 180  # 3 hours late
+    priority: "MEDIUM"
+    description: "Shipment arrived at port more than 3 hours late"
+    
+  - name: "Late Customs Clearance"
+    type: "LATE_ARRIVAL"
+    milestone_type: "CUSTOMS_CLEARED"
+    threshold_minutes: 360  # 6 hours late
+    priority: "HIGH"
+    description: "Customs clearance completed more than 6 hours late"
+    
+  - name: "Late Delivery"
+    type: "LATE_ARRIVAL"
+    milestone_type: "DELIVERED"
+    threshold_minutes: 120  # 2 hours late
+    priority: "CRITICAL"
+    description: "Delivery completed more than 2 hours late"
+    
+  # Customs-specific delays
+  - name: "Customs Processing Delay"
+    type: "CUSTOMS_DELAY"
+    milestone_type: "CUSTOMS_CLEARED"
+    threshold_minutes: 1440  # 24 hours between submission and clearance
+    priority: "CRITICAL"
+    description: "Customs processing taking more than 24 hours"
+    
+  - name: "Extended Customs Hold"
+    type: "CUSTOMS_DELAY"
+    milestone_type: "CUSTOMS_CLEARED"
+    threshold_minutes: 2880  # 48 hours
+    priority: "CRITICAL"
+    description: "Shipment held in customs for more than 48 hours"
+    
+  # Stale status (no updates for extended period)
+  - name: "Stale Status - 48 Hours"
+    type: "STALE_STATUS"
+    threshold_minutes: 2880  # 48 hours
+    priority: "MEDIUM"
+    description: "No milestone updates received for 48 hours"
+    
+  - name: "Stale Status - 72 Hours"
+    type: "STALE_STATUS"
+    threshold_minutes: 4320  # 72 hours
+    priority: "HIGH"
+    description: "No milestone updates received for 72 hours"
+    
+  - name: "Stale Status - 1 Week"
+    type: "STALE_STATUS"
+    threshold_minutes: 10080  # 1 week
+    priority: "CRITICAL"
+    description: "No milestone updates received for 1 week"
+    
+  # Location mismatches
+  - name: "Unexpected Location"
+    type: "LOCATION_MISMATCH"
+    threshold_minutes: 0  # Immediate
+    priority: "HIGH"
+    description: "Shipment reported at unexpected location"
+
+# Priority levels explanation:
+# - LOW: Minor issue, informational
+# - MEDIUM: Moderate delay, requires monitoring
+# - HIGH: Significant delay, requires attention
+# - CRITICAL: Severe issue, requires immediate action
+
+# Made with Bob
